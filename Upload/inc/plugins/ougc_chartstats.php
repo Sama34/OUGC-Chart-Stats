@@ -67,6 +67,7 @@ function ougc_chartstats_info()
 		'version'		=> '1.8.0',
 		'versioncode'	=> 1800,
 		'compatibility'	=> '18*',
+		'codename'		=> 'ougc_chartstats',
 		'pl'			=> array(
 			'version'	=> 13,
 			'url'		=> 'https://community.mybb.com/mods.php?action=view&pid=573'
