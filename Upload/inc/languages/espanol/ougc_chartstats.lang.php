@@ -7,6 +7,7 @@
  *	Copyright: © 2020 Omar Gonzalez
  *
  *	Website: https://ougc.network
+ *	Based off: https://community.mybb.com/thread-226110-post-1341939.html#pid1341939
  *
  *	Display public stats using a chart format using Highcharts.
  *
