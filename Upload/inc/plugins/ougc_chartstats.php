@@ -120,7 +120,8 @@ function ougc_chartstats_activate()
 		Highcharts.chart(\'graphstats\',
 			{
 				chart: {
-					type: \'areaspline\'
+					type: \'areaspline\',
+					//width: 1200
 				},
 				title: {
 					text: \'{$lang->ougc_chartstats_title}\'
@@ -153,9 +154,9 @@ function ougc_chartstats_activate()
 			tooltip: {
 				shared: true
 			},
-			credits: {
+			/*credits: {
 				enabled: false
-			},
+			},*/
 			plotOptions: {
 				areaspline: {
 					fillOpacity: 0.4
