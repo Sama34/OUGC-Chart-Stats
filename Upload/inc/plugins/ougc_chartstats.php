@@ -339,6 +339,8 @@ function ougc_chartstats_stats_end()
 
 	$max_days = (int)$mybb->settings['ougc_chartstats_days'];
 
+	$max_days = $mybb->get_input('days', MyBB::INPUT_INT) > 0 ? $mybb->get_input('days', MyBB::INPUT_INT) : $max_days;
+
 	if(!$stats || $stats['dateline'] < TIME_NOW - (3600 * (int)$mybb->settings['ougc_chartstats_cache']) )
 	{
 		$stats = array(
