@@ -339,9 +339,9 @@ function ougc_chartstats_stats_end()
 
 	$max_days = (int)$mybb->settings['ougc_chartstats_days'];
 
-	$max_days = $mybb->get_input('days', MyBB::INPUT_INT) > 0 ? $mybb->get_input('days', MyBB::INPUT_INT) : $max_days;
+	$input_days = $mybb->get_input('days', MyBB::INPUT_INT) > 0 ? $mybb->get_input('days', MyBB::INPUT_INT) : $max_days;
 
-	if(!$stats || $stats['dateline'] < TIME_NOW - (3600 * (int)$mybb->settings['ougc_chartstats_cache']) )
+	if(!$stats || $max_days !== $input_days || $stats['dateline'] < TIME_NOW - (3600 * (int)$mybb->settings['ougc_chartstats_cache']) )
 	{
 		$stats = array(
 			'dateline' => TIME_NOW,
@@ -356,7 +356,7 @@ function ougc_chartstats_stats_end()
 		$query = $db->simple_select(
 			'posts',
 			'COUNT(pid) AS stats_count, DAY(FROM_UNIXTIME(dateline)) AS stats_day',
-			"dateline>'{$max_dateline}'",
+			"dateline>'{$max_dateline}' AND visible='1'",
 			array('group_by' => 'stats_day')
 		);
 
@@ -373,7 +373,7 @@ function ougc_chartstats_stats_end()
 		$query = $db->simple_select(
 			'threads',
 			'COUNT(tid) AS stats_count, DAY(FROM_UNIXTIME(dateline)) AS stats_day',
-			"dateline>'{$max_dateline}'",
+			"dateline>'{$max_dateline}' AND visible='1'",
 			array('group_by' => 'stats_day')
 		);
 
@@ -421,7 +421,10 @@ function ougc_chartstats_stats_end()
 			}
 		}
 
-		$mybb->cache->update('ougc_chartstats', $stats);
+		if($max_days !== $input_days)
+		{
+			$mybb->cache->update('ougc_chartstats', $stats);
+		}
 	}
 
 	ougc_chartstats_lang_load();
