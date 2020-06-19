@@ -421,7 +421,7 @@ function ougc_chartstats_stats_end()
 			}
 		}
 
-		if($max_days !== $input_days)
+		if($max_days === $input_days)
 		{
 			$mybb->cache->update('ougc_chartstats', $stats);
 		}
